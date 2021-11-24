@@ -9,7 +9,7 @@ import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 import Divider from '@material-ui/core/Divider';
 import { Button, Grid, Modal } from '@material-ui/core';
-import PopUpCompras from './PopUpCompras';
+import NuevaCompra from './NuevaCompra';
 import { Footer } from './Footer';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -45,15 +45,6 @@ export const Compras = (props) => {
   //States
   const [compras, setCompras] = useState(null);
   const [hasError, setHasError] = useState(null);
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   //API Call
   useEffect(() => {
@@ -132,17 +123,23 @@ export const Compras = (props) => {
     );
   };
 
+  const goToNuevaCompra = () => {
+    let path = `nuevaCompra`;
+    history.push(path);
+  };
+
   //MAIN Rendering
   return (
     <>
       <Grid className={$.header}>
         <h1 className={$.title}>Compras Realizadas</h1>
-        <Button variant="contained" className={$.button} onClick={handleOpen}>
+        <Button
+          variant="contained"
+          className={$.button}
+          onClick={this.goToNuevaCompra}
+        >
           Nueva Compra
         </Button>
-        <Modal open={open} onClose={handleClose}>
-          <PopUpCompras state={setOpen} />
-        </Modal>
       </Grid>
       <Divider />
       <br />

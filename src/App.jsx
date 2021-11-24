@@ -14,7 +14,8 @@ import {
 } from '@material-ui/icons';
 import { Presupuestos } from './components/Presupuestos';
 import { Compras } from './components/Compras';
-import { Proveedores } from './components/Proveedores'
+import { Proveedores } from './components/Proveedores';
+import { NuevaCompra } from './components/NuevaCompra';
 
 export default function App() {
   const $ = useStyles();
@@ -37,9 +38,22 @@ export default function App() {
             <Switch>
               <Route path="/" exact component={MisProyectos} />
               <Route path="/proyectos" exact component={DatosGenerales} />
-              <Route path="/proyectos/presupuestos" exact component={Presupuestos} />
+              <Route
+                path="/proyectos/presupuestos"
+                exact
+                component={Presupuestos}
+              />
               <Route path="/proyectos/compras" exact component={Compras} />
-              <Route path="/proyectos/proveedores" exact component={Proveedores} />
+              <Route
+                path="/proyectos/proveedores"
+                exact
+                component={Proveedores}
+              />
+              <Route
+                path="/proyectos/nuevaCompra"
+                exact
+                component={NuevaCompra}
+              />
             </Switch>
           </div>
         </div>
