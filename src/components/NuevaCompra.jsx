@@ -6,6 +6,7 @@ import {
   Divider,
   Typography,
 } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -68,53 +69,62 @@ export const NuevaCompra = (props) => {
   const handleClose = () => {
     props.state(false);
   };
-  return (
-    <>
-      <div className={$.modal}>
-        <h2>Realizar Pedido de Compra</h2>
-        <Divider />
-        <div className={$.inputs}>
-          <TextField label="Rubro" />
-          <TextField label="Subrubro" />
-        </div>
-        <Typography>Cuentas con $60.000 para este rubro </Typography>
-        <br />
-        <Divider />
-        <div className={$.secondRow}>
-          <TextField label="Fecha" />
+
+  const loadingRendering = () => {
+    return <Alert severity="info">Cargando...</Alert>;
+  };
+
+  const rendering = () => {
+    return (
+      <>
+        <div className={$.modal}>
+          <h2>Realizar Pedido de Compra</h2>
+          <Divider />
+          <div className={$.inputs}>
+            <TextField label="Rubro" />
+            <TextField label="Subrubro" />
+          </div>
+          <Typography>Cuentas con $60.000 para este rubro </Typography>
+          <br />
+          <Divider />
+          <div className={$.secondRow}>
+            <TextField label="Fecha" />
+            <div className={$.cargarFactura}>
+              <TextField label="Monto" />
+              <Button color="primary" sx={{ minWidth: 100 }}>
+                Cargar Factura
+              </Button>
+            </div>
+          </div>
+          <div className={$.descripcion}>
+            <Typography variant="h5">Descripcion</Typography>
+            <br />
+            <TextField
+              label="La compra cuenta con los siguientes objetos/servicios"
+              multiline
+              rows={6}
+              className={$.multiLineInput}
+            />
+          </div>
           <div className={$.cargarFactura}>
-            <TextField label="Monto" />
+            <TextField label="Proveedor" className={$.proveedor} />
             <Button color="primary" sx={{ minWidth: 100 }}>
-              Cargar Factura
+              Proveedor Nuevo
+            </Button>
+          </div>
+
+          <div className={$.button}>
+            <Button color="primary" className={$.botones} onClick={handleClose}>
+              Cancelar
+            </Button>
+            <Button color="primary" onClick={submitForm}>
+              Finalizar Pedido de Compra
             </Button>
           </div>
         </div>
-        <div className={$.descripcion}>
-          <Typography variant="h5">Descripcion</Typography>
-          <br />
-          <TextField
-            label="La compra cuenta con los siguientes objetos/servicios"
-            multiline
-            rows={6}
-            className={$.multiLineInput}
-          />
-        </div>
-        <div className={$.cargarFactura}>
-          <TextField label="Proveedor" className={$.proveedor} />
-          <Button color="primary" sx={{ minWidth: 100 }}>
-            Proveedor Nuevo
-          </Button>
-        </div>
+      </>
+    );
+  };
 
-        <div className={$.button}>
-          <Button color="primary" className={$.botones} onClick={handleClose}>
-            Cancelar
-          </Button>
-          <Button color="primary" onClick={submitForm}>
-            Finalizar Pedido de Compra
-          </Button>
-        </div>
-      </div>
-    </>
-  );
+  return <>{rendering()}</>;
 };

@@ -11,6 +11,7 @@ import Divider from '@material-ui/core/Divider';
 import { Button, Grid, Modal } from '@material-ui/core';
 import NuevaCompra from './NuevaCompra';
 import { Footer } from './Footer';
+import { Link } from 'react-router-dom';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -123,16 +124,12 @@ export const Compras = (props) => {
     );
   };
 
-  const goToNuevaCompra = () => {
-    let path = `nuevaCompra`;
-    history.push(path);
-  };
-
   //MAIN Rendering
   return (
     <>
       <Grid className={$.header}>
         <h1 className={$.title}>Compras Realizadas</h1>
+
         <Button
           variant="contained"
           className={$.button}
