@@ -45,7 +45,6 @@ export const Presupuestos = () => {
       const getFunctionRendEsp = getRendEsp;
       const getFunctionContratos = getContratos;
       const getFunctionGastos = getGastos;
-
       const getFunctionTotales = getTotales;
 
       try {
@@ -66,7 +65,7 @@ export const Presupuestos = () => {
         setRendEsp(rendicionesEspecificas);
         setContratos(contratos);
         setGastos(gastos);
-        setTotalGastos(totalGastos.body.totalGastos);
+        setTotalGastos(totalGastos.totalGastos);
         setTotales(totales);
       } catch (err) {
         setHasError(true);
