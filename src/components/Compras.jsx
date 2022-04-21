@@ -47,6 +47,7 @@ export const Compras = (props) => {
   const [compras, setCompras] = useState(null);
   const [hasError, setHasError] = useState(null);
   const [open, setOpen] = useState(false);
+  const [newCompra, setNewCompra] = useState(true);	
 
   const handleOpen = () => {
     setOpen(true);
@@ -58,6 +59,7 @@ export const Compras = (props) => {
 
   //API Call
   useEffect(() => {
+    
     async function fetchCompra() {
       const getFunction = getAllCompras;
       try {
@@ -68,8 +70,11 @@ export const Compras = (props) => {
         console.log('ERROR FETCH API [compras]: ' + err);
       }
     }
-    fetchCompra();
-  }, [compras]);
+    if(newCompra){
+      fetchCompra();
+      setNewCompra(false);
+    }
+  }, [newCompra]);
 
   const loadingRendering = () => {
     return <Alert severity="info">Cargando...</Alert>;
@@ -135,12 +140,12 @@ export const Compras = (props) => {
   return (
     <>
       <Grid className={$.header}>
-        <h1 className={$.title}>Compras Realizadas</h1>
+        <h1>Compras Realizadas</h1>
         <Button variant="contained" className={$.button} onClick={handleOpen}>
           Nueva Compra
         </Button>
         <Modal open={open} onClose={handleClose}>
-          <PopUpCompras state={setOpen} />
+          <PopUpCompras state={setOpen} stateNewCompra={setNewCompra} />
         </Modal>
       </Grid>
       <Divider />

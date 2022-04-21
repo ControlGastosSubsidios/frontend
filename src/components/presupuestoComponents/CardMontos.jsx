@@ -14,8 +14,8 @@ export default function CardMontos({ totalGastos, totalPresupuesto }) {
     totalPresupuesto ? totalPresupuesto : null;
   }
 
-  let montoDisponible = (p, g) => p - g;
-  let nivelDeEjecucion = (p, g) =>
+  const montoDisponible = (p, g) => p - g;
+  const nivelDeEjecucion = (p, g) =>
     Number(g / p).toLocaleString(undefined, {
       style: 'percent',
       minimumFractionDigits: 2,
@@ -23,21 +23,30 @@ export default function CardMontos({ totalGastos, totalPresupuesto }) {
 
   return (
     <Card className={classes.root}>
-      <CardContent>
-        <Typography
-          variant="h5"
-          component="h2"
-          className={classes.montoDisponible}
-        >
-          Monto disponible: $ {montoDisponible(totalPresupuesto, totalGastos)}
+      <CardContent className={classes.cardContent}>
+        <Typography className={classes.typography} >
+          Presupuesto total:
         </Typography>
-
-        <Typography
-          variant="body2"
-          component="p"
-          className={classes.nivelDeEjecucion}
-        >
-          Nivel de ejecución: {nivelDeEjecucion(totalPresupuesto, totalGastos)}
+        <Typography variant="h5">
+          <b>$ {totalPresupuesto}</b>
+        </Typography>
+        <Typography className={classes.typography}>
+          Monto disponible:
+        </Typography>
+        <Typography variant="h5">
+          <b>$ {montoDisponible(totalPresupuesto, totalGastos)}</b>
+        </Typography>
+        <Typography className={classes.typography}>
+         Total gastado:
+        </Typography>
+        <Typography variant="h5">
+          <b>$ {totalGastos}</b>
+        </Typography>
+        <Typography className={classes.typography}>
+          Nivel de ejecución: 
+        </Typography>
+        <Typography variant="h5">
+          <b>{nivelDeEjecucion(totalPresupuesto, totalGastos)}</b>
         </Typography>
       </CardContent>
     </Card>
@@ -46,37 +55,21 @@ export default function CardMontos({ totalGastos, totalPresupuesto }) {
 
 const useStyles = makeStyles({
   root: {
-    width: '25rem',
-    height: '15rem',
+    width: '22rem',
+    height: '100%',
     background: '#DEFAAE',
     border: '4px solid rgba(96, 150, 0, 0.94)',
     boxSizing: 'border-box',
     borderRadius: '19px',
   },
-
-  montoDisponible: {
+  cardContent: {
     width: '20rem',
     height: '6.5rem',
-
-    fontFamily: 'Cabin',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontSize: '40px',
-    lineHeight: '49px',
-    color: '#000000',
+    display: 'grid'
   },
-
-  nivelDeEjecucion: {
-    width: '20rem',
-    height: '6.5rem',
-    fontFamily: 'Cabin',
-    fontStyle: 'normal',
-    fontWeight: 'normal',
-    fontSize: '40px',
-    lineHeight: '49px',
-    color: '#000000',
+  typography: {
+    fontSize: '30px'
   },
-
   bullet: {
     display: 'inline-block',
     margin: '0 2px',

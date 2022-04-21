@@ -4,9 +4,8 @@ import {
   makeStyles,
   MenuItem,
   Menu,
-  Divider,
 } from '@material-ui/core';
-import { Person, Mail, Drafts, Inbox, ExpandMore } from '@material-ui/icons';
+import { Person, Mail, ExpandMore } from '@material-ui/icons';
 import { usuarioPrueba } from '../constants/constants';
 
 export default function Header(props) {

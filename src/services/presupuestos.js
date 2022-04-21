@@ -8,6 +8,8 @@ import {
   pagoAProv,
 } from '../constants/constants';
 
+const axios = require('axios');
+
 export async function getPresupuesto() {
   return Promise.resolve(presupuestoPrueba);
 }
@@ -34,4 +36,15 @@ export async function getRendEsp() {
 
 export async function getPagoAProv() {
   return Promise.resolve(pagoAProv);
+}
+export async function getTotalGastos() {
+  const config = {
+    method: 'GET',
+    url: 'http://localhost:3001/api/compras/gastos/totalGastos',
+    json: true,
+  };
+  console.log('LOG ANTES AXIOS');
+  const res = await axios(config);
+  console.log('RESPONSE AXIOS ' + JSON.stringify(res));
+  return res;
 }

@@ -12,6 +12,7 @@ import {
   getPagoAProv,
   getRendEsp,
   getContratos,
+  getTotalGastos
 } from '../services/presupuestos.js';
 import { useState, useEffect } from 'react';
 import Alert from '@material-ui/lab/Alert';
@@ -31,6 +32,7 @@ export const Presupuestos = () => {
   const [rendicionesEspecificas, setRendEsp] = useState(null);
   const [contratos, setContratos] = useState(null);
   const [gastos, setGastos] = useState(null);
+  const [totalGastos, setTotalGastos] = useState(null);
 
   const [totales, setTotales] = useState(null);
 
@@ -38,7 +40,7 @@ export const Presupuestos = () => {
     async function fetchPrespuesto() {
       const getFunctionPresupuesto = getPresupuesto;
       const getFunctionReformulacion = getReformulacion;
-
+      const getFunctionTotalGastos = getTotalGastos;
       const getFunctionPagoAProv = getPagoAProv;
       const getFunctionRendEsp = getRendEsp;
       const getFunctionContratos = getContratos;
@@ -56,15 +58,15 @@ export const Presupuestos = () => {
         const gastos = await getFunctionGastos();
 
         const totales = await getFunctionTotales();
-
+        const totalGastos = await getFunctionTotalGastos();
         setPresupuesto(presupuesto);
         setReformulacion(reformulacion);
-
+        console.log("Total gastos: "+ JSON.stringify(totalGastos));
         setPagoAProv(pagoAProveedores);
         setRendEsp(rendicionesEspecificas);
         setContratos(contratos);
         setGastos(gastos);
-
+        setTotalGastos(totalGastos.body.totalGastos);
         setTotales(totales);
       } catch (err) {
         setHasError(true);
@@ -82,19 +84,21 @@ export const Presupuestos = () => {
     return (
       <>
         <div className={$.root}>
-          <Grid container direction="column" justifyContent="center" alignItems="center">
+          <Grid container>
             <Grid
               container
               direction="row"
               justifyContent="space-between"
               alignItems="flex"
               xl="auto"
+              className={$.topContainer}
             >
               <CardMontos
                 item
                 xl={6}
                 totalPresupuesto={presupuesto.totalPresupuesto}
-                totalGastos={gastos.totalGastos}
+                totalGastos={totalGastos}
+                
               />
               <Card className={$.card}>
                 <CardContent >
@@ -146,7 +150,9 @@ const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
-
+  topContainer:{
+    marginBottom: '5rem'
+  },
   root: {
     height: '100%',
     display: 'flex',

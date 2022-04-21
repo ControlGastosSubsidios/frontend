@@ -81,6 +81,7 @@ export default function PopUpCompras(props) {
   //REVISAR ACA CONSUMO DE API REST - POST.
   const submitForm = async () => {
     props.state(false);
+    
     let data = {
       fecha: fecha,
       rubro: rubro,
@@ -93,6 +94,7 @@ export default function PopUpCompras(props) {
       nombre: nombre,
     };
     const res = await postCompra(data);
+    props.stateNewCompra(true);
     console.log('[PopUpCompras] submitForm response: ', res);
   };
   const submitHandle = (handle, value) => {
